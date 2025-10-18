@@ -63,6 +63,34 @@ class DoctorTree:
         self.printTree(node.left, level + 1)
         self.printTree(node.right, level + 1)
 
+    def preorder(self, node): #Base case if we've reached a leaf
+        if node is None:
+            return []
+        result = [node.value]
+        #Recursive case to append list
+        result += self.preorder(node.left)
+        result += self.preorder(node.right)
+        #Return the result
+        return result
+    
+    def inorder(self, node):
+        if node is None: #Base case if node is a leaf
+            return []
+        result = []
+        result += self.inorder(node.left)
+        result.append(node.value)
+        result += self.inorder(node.right)
+        return result
+
+    def postorder(self, node):
+        if node is None: #Base case if node is a leaf
+            return [] 
+        result = []
+        result += self.postorder(node.left)
+        result += self.postorder(node.right)
+        result.append(node.value)
+        return result
+
 
 # Test your DoctorTree and DoctorNode classes here
 tree = DoctorTree()
@@ -72,4 +100,17 @@ tree.insert("Dr. Croft", "Dr. Goldsmith", "right")
 tree.insert("Dr. Croft", "Dr. Phan", "left")
 tree.insert("Dr. Phan", "Dr. Carson", "right") 
 tree.insert("Dr. Phan", "Dr. Morgan", "left")
+
+#Edge Cases
+tree.insert("Dr. Phan", "Dr. Smith", "right") 
+tree.insert("Dr. Potato", "Dr. Croft", "left")
+tree.insert("Dr. Croft", 2, "right")
+
+
 tree.printTree()
+#Test preorder function
+print(tree.preorder(tree.root))
+#Test inorder function
+print(tree.inorder(tree.root))
+#Test post order function
+print(tree.postorder(tree.root))
