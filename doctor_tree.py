@@ -14,6 +14,10 @@ class DoctorTree:
         if self.root == None:
             print("Tree is empty. Cannot insert without root.")
             return
+        #If side is not left or right return error
+        if side not in ("left","right"):
+            print(f"Invalid side '{side}'. Use 'left' or 'right'.")
+            return False
         #Start from root if not part of recursive call
         if current_node is None:
             current_node = self.root
@@ -105,6 +109,7 @@ tree.insert("Dr. Phan", "Dr. Morgan", "left")
 tree.insert("Dr. Phan", "Dr. Smith", "right") 
 tree.insert("Dr. Potato", "Dr. Croft", "left")
 tree.insert("Dr. Croft", 2, "right")
+tree.insert("Dr. Croft", "Dr. X", "middle")  # should print invalid side
 
 
 tree.printTree()
